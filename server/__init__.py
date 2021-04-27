@@ -27,25 +27,14 @@ def api_battery_test():
     """
     Example payload to keep it simple for arduino:
     {
-        "battery": {
-            "public_id": 1
-            ...
-        },
-        "test": {
-            "capacity_mah": 1200
-            ...
-        }
+        "public_id": 1,
+        "capacity_mah": 2000,
+        "resistance_mohm": 10
     }
     """
     payload = request.json
-    # Test payload
+
     if payload is None:
         return "You must provide a JSON payload.", 400
-    if not ('battery' in payload or 'test' in payload):
-        return "Your payload must contain 'battery' and 'test' key.", 400
 
     return payload
-
-
-if __name__ == '__main__':
-    app.run()

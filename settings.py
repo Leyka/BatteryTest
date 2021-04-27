@@ -8,7 +8,7 @@ dotenv_path = join(current_dir, '.env')
 load_dotenv(dotenv_path)
 
 # DEBUG
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # DATABASE_URI
 default_database_uri = join(current_dir, 'battery_test.db')

@@ -2,6 +2,7 @@
 Run this script to create a fresh database
 """
 from server import db
+from server import models
 from sqlalchemy_utils import database_exists
 from settings import DEBUG, DATABASE_URI
 
