@@ -1,4 +1,4 @@
-from server.models import Battery, BatterySpec
+from app.models import Battery, BatterySpec
 
 
 class BatteryService:
