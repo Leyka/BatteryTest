@@ -7,6 +7,7 @@ setup(
     install_requires=[
         'flask',
         'flask_sqlalchemy',
+        'flask_script',
         'sqlalchemy_utils',
         'python-dotenv',
     ]

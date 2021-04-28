@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from settings import DATABASE_URI
+from config import DATABASE_URI, DEBUG
 
 app = Flask(__name__)
+
+app.config['DEBUG'] = DEBUG
 
 # Configure database
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI

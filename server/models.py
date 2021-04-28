@@ -1,12 +1,10 @@
-from server import db
-from datetime import datetime
-
 """
-Relation:
-
 BatterySpec 1 -- *   Battery
 Battery     1 -- *   BatteryTest
 """
+
+from server import db
+from datetime import datetime
 
 
 class Battery(db.Model):
