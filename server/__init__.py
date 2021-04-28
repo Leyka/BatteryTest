@@ -12,13 +12,29 @@ db = SQLAlchemy(app)
 
 # ==== HTML =====
 @app.route('/')
-def dashboard_view():
+def dashboard():
     return render_template('index.html')
 
 
+@app.route('/doc')
+def doc():
+    return render_template('doc.html')
+
+
 @app.route('/battery/<int:battery_id>')
-def battery_view(battery_id):
+def battery(battery_id):
     return render_template('battery.html', battery_id=battery_id)
+
+
+@app.route('/specs')
+def specs():
+    return render_template('specs/index.html')
+
+
+@app.route('/specs/new', methods=['GET', 'POST'])
+def specs_new():
+    if request.method == 'GET':
+        return render_template('specs/new.html')
 
 
 # ==== API =====

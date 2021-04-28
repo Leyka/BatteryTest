@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}Documentation{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>How to feed the database with battery tests</h2>
+        <p>You need to call the API route this way</p>
+        <p><code>POST</code> HTTP request with URL: <code>/api/tests</code></p>
+        <p>And your body payload should look like this:</p>
+        <code>
+        {
+            "public_id": 1,
+            "capacity_mah": 2000,
+            "resistance_mohm": 10
+        }
+        </code>
+    </div>
+    <hr>
+{% endblock %}
