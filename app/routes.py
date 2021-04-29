@@ -11,7 +11,8 @@ test_service = BatteryTestService()
 
 @app.route('/')
 def dashboard():
-    return render_template('index.html')
+    batteries = battery_service.get_all_batteries()
+    return render_template('index.html', batteries=batteries)
 
 
 @app.route('/doc')

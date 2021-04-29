@@ -3,5 +3,22 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-
+  {% if batteries %}
+    <table>
+      <thead>
+        <tr>
+          <th>Battery</th>
+          <th>Test Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for battery in batteries %}
+        <tr>
+          <td>Battery #{{ battery.public_id}}</td>
+          <td>{{ battery.tests.count()}} tests</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
 {% endblock %}

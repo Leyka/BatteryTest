@@ -3,6 +3,9 @@ from app import db
 
 
 class BatteryService:
+    def get_all_batteries(self):
+        return Battery.query.all()
+
     def get_or_create_battery(self, public_id) -> Battery:
         # Get battery by public id
         battery = Battery.query.filter_by(public_id=public_id).first()
