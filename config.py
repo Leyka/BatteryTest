@@ -11,5 +11,5 @@ load_dotenv(dotenv_path)
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 # DATABASE_URI
-default_database_uri = join(current_dir, 'battery_test.db')
+default_database_uri = join(current_dir, 'battery.db')
 DATABASE_URI = os.getenv('DATABASE_URI', f'sqlite:///{default_database_uri}')

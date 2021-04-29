@@ -1,12 +1,24 @@
 /* general */
-* { padding: 0; margin: 0; box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 /* nav */
 nav {
-    display: flex;
-    justify-content: space-evenly;
-    background: #333;
-    padding: 2px;
+  display: flex;
+  justify-content: space-evenly;
+  background: #333;
+  padding: 2px;
 }
-nav a { color: #fff; }
-nav a:hover { text-decoration: none; }
+nav a {
+  color: #fff;
+}
+nav a:hover {
+  text-decoration: none;
+}
+
+/* helpers */
+.vertial-space {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

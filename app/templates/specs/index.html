@@ -3,5 +3,25 @@
 {% block title %}Battery Specs{% endblock %}
 
 {% block content %}
-    <a href="/specs/new">Create New Spec</a>
+    <a href="/specs/new" class="vertial-space">Create New Spec</a>
+    {% if specs %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Manufacturer</th>
+                    <th>Model</th>
+                    <!-- <th></th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for spec in specs %}
+                <tr>
+                    <td>{{ spec.manufacturer }}</td>
+                    <td>{{ spec.model }}</td>
+                    <!-- <td><a href="/specs/edit/{{spec.id}}">Edit</a> / <a href="/specs/delete/{{spec.id}}">Delete</a></td> -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}
