@@ -10,5 +10,6 @@ setup(
         'flask_script',
         'sqlalchemy_utils',
         'python-dotenv',
+        'pyserial'
     ]
 )
