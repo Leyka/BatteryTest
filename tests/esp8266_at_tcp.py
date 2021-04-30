@@ -28,7 +28,7 @@ cancel_event = Event()
 t = Thread(target=read_from_esp)
 t.start()
 
-# connect TCP port 5000
+# connect TCP port 5000 (not working for now)
 connect_tcp = 'CIPSTART="TCP","127.0.0.1",5000'
 ftdi.write(encode_at_instruction(connect_tcp))
 
