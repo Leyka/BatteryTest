@@ -13,7 +13,7 @@ void setup() {
   Serial.println();
 
   // Connect to wifi
-  WiFi.begin(STASSID, STAPSK);
+  WiFi.begin(WIFI_SSID, WIFI_PW);
 }
 
 void loop() {
@@ -56,7 +56,7 @@ void send_http_battery_test(int battery_id, int capacity, float resistance) {
   http.addHeader("Content-Type", "application/json");
 
   // Send POST payload
-  char payload[1024];
+  char payload[512];
   sprintf(payload, "{\"public_id\": %d, \"capacity_mah\": %d, \"resistance_mohm\": %f}", battery_id, capacity, resistance);
   int httpCode = http.POST(payload);
 
