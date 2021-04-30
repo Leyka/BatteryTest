@@ -1,7 +1,6 @@
 # BatteryTest
 
-Web interface that collects 18650 Lithium battery capacity test data sent by ESP8266 board.
-
+18650 Lithium battery capacity tester with web interface
 
 ## Configuration
 
