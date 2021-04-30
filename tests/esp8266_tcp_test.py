@@ -1,10 +1,13 @@
-from time import sleep
+"""
+ESP8266 instructions:
+https://www.espressif.com/sites/default/files/documentation/4a-esp8266_at_instruction_set_en.pdf
+"""
 from serial import Serial
 from threading import Thread, Event
 
 
-def encode(msg):
-    return f'{msg}\r\n'.encode()
+def encode_at_instruction(instruction):
+    return f'AT+{instruction}\r\n'.encode()
 
 
 def read_from_esp():
@@ -14,7 +17,7 @@ def read_from_esp():
             print(bytes.decode())
 
 
-PORT = "/dev/cu.usbserial-A50285BI"
+PORT = "/dev/cu.usbserial-A50285BI"  # on mac
 ftdi = Serial(PORT, 115200, timeout=2)
 
 if not ftdi.is_open:
@@ -25,9 +28,9 @@ cancel_event = Event()
 t = Thread(target=read_from_esp)
 t.start()
 
-# Test
-
-ftdi.write(encode('AT'))
+# connect TCP port 5000
+connect_tcp = 'CIPSTART="TCP","127.0.0.1",5000'
+ftdi.write(encode_at_instruction(connect_tcp))
 
 
 # Terminate
