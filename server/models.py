@@ -36,7 +36,7 @@ class BatteryTest(db.Model):
         'battery.id'), nullable=False)
     capacity_mah = db.Column(db.Integer, nullable=False)
     resistance_mohm = db.Column(db.Float)
-    date = db.Column(db.DateTime, default=datetime.now())
+    date = db.Column(db.DateTime, default=datetime.now)
 
     def __init__(self, battery_id, capacity, resistance):
         self.battery_id = battery_id

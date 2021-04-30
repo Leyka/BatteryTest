@@ -6,13 +6,10 @@
 #define API_TESTS_ROUTE "/api/tests"
 
 void wait_for_wifi();
-void send_http_battery_test(int battery_id, int capacity, float resistance);
+int send_http_battery_test(int battery_id, int capacity, float resistance);
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println();
-
-  // Connect to wifi
+  // Begin connection to wifi
   WiFi.begin(WIFI_SSID, WIFI_PW);
 }
 
@@ -27,31 +24,24 @@ void loop() {
   int capacity = 2500;
   float resistance = 3.14;
 
-  send_http_battery_test(battery_id, capacity, resistance);
+  int code = send_http_battery_test(battery_id, capacity, resistance);
 
   // Dummy delay
   delay(5000);
 }
 
 void wait_for_wifi() {
-  Serial.print("Waiting for wifi");
-
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
   }
-
-  Serial.println();
-  Serial.print("Connected! IP address: ");
-  Serial.println(WiFi.localIP());
 }
 
-void send_http_battery_test(int battery_id, int capacity, float resistance) {
+// Returns 0 if success, else an HTTP code error (ex. 404, 500 etc.)
+int send_http_battery_test(int battery_id, int capacity, float resistance) {
   WiFiClient client;
   HTTPClient http;
 
   char* url = "http://" SERVER_IP API_TESTS_ROUTE;
-  Serial.println("[HTTP] Begin request");
   http.begin(client, url);
   http.addHeader("Content-Type", "application/json");
 
@@ -59,20 +49,13 @@ void send_http_battery_test(int battery_id, int capacity, float resistance) {
   char payload[512];
   sprintf(payload, "{\"public_id\": %d, \"capacity_mah\": %d, \"resistance_mohm\": %f}", battery_id, capacity, resistance);
   int httpCode = http.POST(payload);
+  http.end();
 
-  if (httpCode > 0) {
-    Serial.printf("[HTTP] Code: %d\n", httpCode);
-
+  if (httpCode == HTTP_CODE_OK) {
     // Success
-    if (httpCode == HTTP_CODE_OK) {
-      const String& payload = http.getString();
-      Serial.println("[HTTP] Received payload:\n<<");
-      Serial.println(payload);
-      Serial.println(">>");
-    }
-  } else {
-    Serial.printf("[HTTP] Failed, error: %s\n", http.errorToString(httpCode).c_str());
+    return 0;
   }
 
-  http.end();
+  // Most likely an error
+  return httpCode;
 }
