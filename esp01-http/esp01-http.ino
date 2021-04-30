@@ -13,7 +13,7 @@ void setup() {
   Serial.println();
 
   // Connect to wifi
-  WiFi.begin(STASSID, STAPSK);
+  WiFi.begin(WIFI_SSID, WIFI_PW);
 }
 
 void loop() {
