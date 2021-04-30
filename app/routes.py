@@ -20,9 +20,10 @@ def doc():
     return render_template('doc.html')
 
 
-@app.route('/battery/<int:battery_id>')
-def battery(battery_id):
-    return render_template('battery.html', battery_id=battery_id)
+@app.route('/batteries/<int:public_id>')
+def battery(public_id):
+    # TODO: Get battery by public_id
+    return render_template('battery.html', battery_id=public_id)
 
 
 @app.route('/specs')

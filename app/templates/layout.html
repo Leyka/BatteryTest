@@ -1,25 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battery Test</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
     <nav>
-        <a href="/">Dashboard</a>
-        <a href="/specs">Specs</a>
-        <a href="/doc">Documentation</a>
+      <a href="/">Batteries</a>
+      <a href="/specs">Specs</a>
+      <a href="/doc">Documentation</a>
     </nav>
     <main>
-        <h1>{% block title %}{% endblock %}</h1>
-        <hr>
-        <div>
-            {% block content %}
-            {% endblock %}
-        </div>
+      <h1>{% block title %}{% endblock %}</h1>
+      <hr />
+      <div>{% block content %} {% endblock %}</div>
     </main>
-</body>
+  </body>
 </html>

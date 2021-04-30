@@ -1,21 +1,33 @@
 {% extends "layout.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}All Batteries{% endblock %}
 
 {% block content %}
   {% if batteries %}
     <table>
       <thead>
         <tr>
-          <th>Battery</th>
-          <th>Test Count</th>
+          <th width="50"></th>
+          <th>Battery ID</th>
+          <th title="Last known capacity (mah)">Capacity</th>
+          <th title="Last known resistance (mohm)">Resistance</th>
+          <th>Color</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {% for battery in batteries %}
         <tr>
-          <td>Battery #{{ battery.public_id}}</td>
-          <td>{{ battery.tests.count()}} tests</td>
+          <th><input type="checkbox" name="" id="" checked></th>
+          <td>
+            <a href="/batteries/{{battery.public_id}}">
+              Battery #{{ battery.public_id}}
+            </a>
+          </td>
+          <td></td>
+          <td></td>
+          <td>{{ battery.color if battery.color else 'N/A' }}</td>
+          <td><a href="#">Delete</a></td>
         </tr>
         {% endfor %}
       </tbody>
