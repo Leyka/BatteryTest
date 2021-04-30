@@ -1,5 +1,5 @@
-from app.models import Battery, BatterySpec, BatteryTest
-from app import db
+from server.models import Battery, BatterySpec, BatteryTest
+from server import db
 
 
 class BatteryService:

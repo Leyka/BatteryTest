@@ -3,7 +3,7 @@ BatterySpec 1 -- *   Battery
 Battery     1 -- *   BatteryTest
 """
 
-from app import db
+from server import db
 from datetime import datetime
 
 

@@ -12,4 +12,4 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Once everything is configured, we can import routes
-from app import routes
+from server import routes

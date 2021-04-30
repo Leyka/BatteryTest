@@ -1,6 +1,6 @@
-from app import app
+from server import app
 from flask import render_template, request, redirect, url_for
-from app.services import BatteryService, BatterySpecService, BatteryTestService
+from server.services import BatteryService, BatterySpecService, BatteryTestService
 
 battery_service = BatteryService()
 spec_service = BatterySpecService()

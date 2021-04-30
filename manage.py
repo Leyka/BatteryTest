@@ -1,5 +1,5 @@
 from flask_script import Manager, Server
-from app import app, db, models
+from server import app, db, models
 from sqlalchemy_utils import database_exists
 from config import DEBUG, DATABASE_URI
 
