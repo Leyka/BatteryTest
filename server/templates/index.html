@@ -4,7 +4,16 @@
 
 {% block content %}
   {% if batteries %}
-    <table>
+    <div class="vertial-space space-between">
+      <div>
+        <a href="#">Select all</a> | <a href="#">Unselect all</a>
+      </div>
+      <div>
+        <!--<a href="#">Export CSV</a> | <a href="#">Copy capacity to clipboard</a>-->
+      </div>
+    </div>
+    <input type="text" placeholder="Search" id="search" class="vertial-space"/>
+    <table class="table-sortable">
       <thead>
         <tr>
           <th width="50"></th>
@@ -18,14 +27,14 @@
       <tbody>
         {% for battery in batteries %}
         <tr>
-          <th><input type="checkbox" name="" id="" checked></th>
+          <th><input type="checkbox" checked class="chkBattery"></th>
           <td>
             <a href="/batteries/{{battery.public_id}}">
               Battery #{{ battery.public_id}}
             </a>
           </td>
-          <td></td>
-          <td></td>
+          <td>{{ battery.tests | map(attribute='capacity_mah') | list | last }}</td>
+          <td>{{ battery.tests | map(attribute='resistance_mohm') | list | last }}</td>
           <td>{{ battery.color if battery.color else 'N/A' }}</td>
           <td><a href="#">Delete</a></td>
         </tr>
