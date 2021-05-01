@@ -6,28 +6,28 @@
   {% if batteries %}
     <div class="vertial-space space-between">
       <div>
-        <a href="#">Select all</a> | <a href="#">Unselect all</a>
+        <a href="#" id="select-all">Unselect all</a>
       </div>
       <div>
         <!--<a href="#">Export CSV</a> | <a href="#">Copy capacity to clipboard</a>-->
       </div>
     </div>
-    <input type="text" placeholder="Search" id="search" class="vertial-space"/>
-    <table class="table-sortable">
+    <input type="text" placeholder="Filter by battery ID" id="filterById" class="vertial-space"/>
+    <table id="tblBatteries" class="table-sortable">
       <thead>
         <tr>
           <th width="50"></th>
           <th>Battery ID</th>
-          <th title="Last known capacity (mah)">Capacity</th>
-          <th title="Last known resistance (mohm)">Resistance</th>
+          <th title="Last known capacity (mah)">Latest Capacity</th>
+          <th title="Last known resistance (mohm)">Latest Resistance</th>
           <th>Color</th>
-          <th></th>
+          <th width="100"></th>
         </tr>
       </thead>
       <tbody>
         {% for battery in batteries %}
         <tr>
-          <th><input type="checkbox" checked class="chkBattery"></th>
+          <td><input type="checkbox" checked class="chkBattery"></td>
           <td>
             <a href="/batteries/{{battery.public_id}}">
               Battery #{{ battery.public_id}}

@@ -14,7 +14,8 @@ class Battery(db.Model):
     used_by = db.Column(db.String)
     spec_id = db.Column(db.Integer, db.ForeignKey('battery_spec.id'))
     tests = db.relationship(
-        'BatteryTest', backref='battery', lazy='dynamic')
+        'BatteryTest', backref='battery', lazy='dynamic', cascade="all,delete")
+    spec = db.relationship('BatterySpec', backref='battery')
 
     def __init__(self, public_id):
         self.public_id = public_id
@@ -28,6 +29,9 @@ class BatterySpec(db.Model):
     def __init__(self, manufacturer, model):
         self.manufacturer = manufacturer
         self.model = model
+
+    def __str__(self):
+        return f"{self.manufacturer} {self.model}"
 
 
 class BatteryTest(db.Model):
