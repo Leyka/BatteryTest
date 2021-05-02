@@ -6,9 +6,12 @@ class BatteryService:
     def get_all_batteries(self):
         return Battery.query.all()
 
+    def get_battery_by_public_id(self, public_id):
+        return Battery.query.filter_by(public_id=public_id).first()
+
     def get_or_create_battery(self, public_id) -> Battery:
         # Get battery by public id
-        battery = Battery.query.filter_by(public_id=public_id).first()
+        battery = self.get_battery_by_public_id(public_id)
         if battery is None:
             # Create
             battery = Battery(public_id)
@@ -16,6 +19,8 @@ class BatteryService:
             db.session.commit()
 
         return battery
+
+
 
 
 class BatterySpecService:

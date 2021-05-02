@@ -10,7 +10,7 @@ test_service = BatteryTestService()
 
 
 @app.route('/')
-def dashboard():
+def index():
     batteries = battery_service.get_all_batteries()
     return render_template('index.html', batteries=batteries)
 
@@ -22,8 +22,11 @@ def doc():
 
 @app.route('/batteries/<int:public_id>')
 def battery(public_id):
-    # TODO: Get battery by public_id
-    return render_template('battery.html', battery_id=public_id)
+    battery = battery_service.get_battery_by_public_id(public_id)
+    if battery is None:
+        return redirect(url_for('index'))
+    specs = spec_service.get_all_specs()
+    return render_template('battery.html', battery=battery, specs=specs)
 
 
 @app.route('/specs')
@@ -41,7 +44,6 @@ def specs_new():
         model = request.form['model']
         spec_service.create_spec(manufacturer, model)
         return redirect(url_for('specs'))
-
 
 # ==== API =====
 @app.route('/api/tests', methods=['POST'])

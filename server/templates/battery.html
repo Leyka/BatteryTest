@@ -1,6 +1,86 @@
 {% extends "layout.html" %}
 
-{% block title %}Battery <code>{{ battery_id }}</code>{% endblock %}
+{% block title %}Battery #<code>{{ battery.public_id }}</code>{% endblock %}
 
 {% block content %}
+  <div class="space-between">
+    <form action="/batteries/update" method="post">
+      <input type="hidden" name="id" value="{{battery.id}}">
+
+      <label>Public ID</label>
+      <input type="text" value="{{battery.public_id}}" disabled>
+
+      <label for="color">Color</label>
+      <input id="color" type="text" value="{{battery.color or ''}}" required>
+
+      <label for="usedby">Used by</label>
+      <input id="usedby" type="text" value="{{battery.used_by or ''}}">
+
+      <label for="spec">Spec</label>
+      <select name="spec" id="spec" required>
+        <option>None</option>
+        {% for spec in specs %}
+          <option value="{{spec.id}}">{{spec}}</option>
+        {% endfor %}
+      </select>
+
+      <input type="submit" value="Save">
+    </form>
+    <div>
+      <h3>Capacity Stats</h3>
+      <table style="max-width:400px;">
+        <thead>
+          <tr>
+            <th>Average</th>
+            <th>Min</th>
+            <th>Max</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>Resistance Stats</h3>
+      <table style="max-width:400px;">
+        <thead>
+          <tr>
+            <th>Average</th>
+            <th>Min</th>
+            <th>Max</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+  <h2>Previous Tests ({{battery.tests | list | length}})</h2>
+  <table class="table-sortable">
+    <thead>
+      <tr>
+        <th>Capacity (mah)</th>
+        <th>Resistance (mΩ)</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for test in battery.tests | sort(attribute='date', reverse = True) %}
+      <tr>
+        <td>{{test.capacity_mah}}</td>
+        <td>{{test.resistance_mohm}}</td>
+        <td>{{test.date}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}

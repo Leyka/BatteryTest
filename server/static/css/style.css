@@ -20,6 +20,12 @@ nav a:hover {
   text-decoration: none;
 }
 
+/* inputs */
+input[type="submit"] {
+  background: #54b370;
+  color: #fff;
+}
+
 /* table sortable */
 .table-sortable th {
   cursor: pointer;
@@ -38,6 +44,7 @@ nav a:hover {
   padding-left: 2px;
 }
 
+
 /* helpers */
 .vertial-space {
   margin-top: 15px;
@@ -47,4 +54,8 @@ nav a:hover {
 .space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.warning {
+  background: #ff830069 !important;
 }
