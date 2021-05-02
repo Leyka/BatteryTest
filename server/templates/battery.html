@@ -85,7 +85,7 @@
     <tr>
       <td>{{test.capacity_mah}}</td>
       <td>{{test.resistance_mohm}}</td>
-      <td>{{test.date}}</td>
+      <td>{{test.date.strftime('%Y-%m-%d %H:%M:%S %p')}}</td>
     </tr>
     {% endfor %}
   </tbody>

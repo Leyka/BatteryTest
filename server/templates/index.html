@@ -1,5 +1,7 @@
-{% extends "layout.html" %} {% block title %}All Batteries{% endblock %} {%
-block content %} {% if batteries %}
+{% extends "layout.html" %}
+{% block title %}All Batteries ({{batteries | length }}){% endblock %}
+{%block content %}
+{% if batteries %}
 <div class="vertical-space">
   {#
   <div>
@@ -18,8 +20,8 @@ block content %} {% if batteries %}
     <tr>
       <th width="40" class="no-sort"><span id="select-all">✘</span></th>
       <th>Battery ID</th>
-      <th width="100" title="Last known capacity (mah)">Capacity</th>
-      <th width="100" title="Last known resistance (mΩ)">Resistance</th>
+      <th width="110" title="Last known capacity (mah)">Capacity</th>
+      <th width="110" title="Last known resistance (mΩ)">Resistance</th>
       <th>Manufacturer</th>
       <th>Model</th>
       <th>Color</th>
