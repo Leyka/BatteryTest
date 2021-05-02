@@ -14,7 +14,7 @@
   const sortedRows = rows.sort((a, b) => {
       const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
       const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
-
+      // TODO: Fix sort for numbers
       return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
   });
 

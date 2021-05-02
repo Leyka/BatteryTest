@@ -22,6 +22,15 @@ class BatteryService:
 
         return battery
 
+    def update_battery(self, id, color, used_by, spec_id):
+        battery = Battery.query.get(id)
+        if battery is None:
+            return
+        battery.color = color.upper()
+        battery.used_by = used_by
+        battery.spec_id = spec_id
+        db.session.commit()
+
 
 class BatterySpecService:
     def get_all_specs(self):
@@ -48,8 +57,8 @@ class BatteryTestService:
         stats.max_capacity = max(capacities)
         # Resistance
         resistances = list(map(lambda t: t.resistance_mohm, battery.tests))
-        stats.avg_resistance = mean(resistances)
-        stats.min_resistance = min(resistances)
-        stats.max_resistance = max(resistances)
+        stats.avg_resistance = round(mean(resistances), 2)
+        stats.min_resistance = round(min(resistances), 2)
+        stats.max_resistance = round(max(resistances), 2)
 
         return stats

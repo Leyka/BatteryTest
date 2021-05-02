@@ -30,6 +30,17 @@ def battery(public_id):
     return render_template('battery.html', battery=battery, specs=specs, stats=stats)
 
 
+@app.route('/batteries/update', methods=['POST'])
+def update_battery():
+    id = request.form['id']
+    public_id = request.form['public_id']
+    color = request.form['color'].replace('#', '')
+    used_by = request.form['used_by']
+    spec_id = request.form['spec_id']
+    battery_service.update_battery(id, color, used_by, spec_id)
+    return redirect(url_for('battery', public_id=public_id))
+
+
 @app.route('/specs')
 def specs():
     all_specs = spec_service.get_all_specs()
