@@ -26,7 +26,8 @@ def battery(public_id):
     if battery is None:
         return redirect(url_for('index'))
     specs = spec_service.get_all_specs()
-    return render_template('battery.html', battery=battery, specs=specs)
+    stats = test_service.get_stats(battery)
+    return render_template('battery.html', battery=battery, specs=specs, stats=stats)
 
 
 @app.route('/specs')
@@ -46,6 +47,8 @@ def specs_new():
         return redirect(url_for('specs'))
 
 # ==== API =====
+
+
 @app.route('/api/tests', methods=['POST'])
 def api_battery_test():
     """

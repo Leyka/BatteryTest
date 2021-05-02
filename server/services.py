@@ -1,4 +1,6 @@
+from statistics import mean
 from server.models import Battery, BatterySpec, BatteryTest
+from server.viewmodels import BatteryTestStats
 from server import db
 
 
@@ -21,8 +23,6 @@ class BatteryService:
         return battery
 
 
-
-
 class BatterySpecService:
     def get_all_specs(self):
         return BatterySpec.query.all()
@@ -38,3 +38,18 @@ class BatteryTestService:
         test = BatteryTest(battery_id, capacity, resistance)
         db.session.add(test)
         db.session.commit()
+
+    def get_stats(self, battery):
+        stats = BatteryTestStats()
+        # Capacity
+        capacities = list(map(lambda t: t.capacity_mah, battery.tests))
+        stats.avg_capacity = round(mean(capacities))
+        stats.min_capacity = min(capacities)
+        stats.max_capacity = max(capacities)
+        # Resistance
+        resistances = list(map(lambda t: t.resistance_mohm, battery.tests))
+        stats.avg_resistance = mean(resistances)
+        stats.min_resistance = min(resistances)
+        stats.max_resistance = max(resistances)
+
+        return stats
