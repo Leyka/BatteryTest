@@ -31,6 +31,17 @@ class BatteryService:
         battery.spec_id = spec_id
         db.session.commit()
 
+    def delete_battery(self, id):
+        battery = Battery.query.get(id)
+        if battery is None:
+            return
+        db.session.delete(battery)
+        db.session.commit()
+
+    def delete_batteries(self, ids):
+        # todo
+        pass
+
 
 class BatterySpecService:
     def get_all_specs(self):

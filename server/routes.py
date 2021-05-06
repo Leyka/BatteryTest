@@ -41,6 +41,18 @@ def update_battery():
     return redirect(url_for('battery', public_id=public_id))
 
 
+@app.route('/batteries/delete/<int:id>')
+def delete_battery_by_id(id):
+    battery_service.delete_battery(id)
+    return redirect(url_for('index'))
+
+
+@app.route('/batteries/delete', methods=['POST'])
+def delete_selected_batteries():
+    battery_ids = request.json['ids']
+    battery_service.delete_batteries(battery_ids)
+
+
 @app.route('/specs')
 def specs():
     all_specs = spec_service.get_all_specs()

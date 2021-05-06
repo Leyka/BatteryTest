@@ -53,8 +53,13 @@ input[type="submit"] {
 .space-between {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .warning {
   background: #ff830069 !important;
+}
+
+.hidden {
+  display: none;
 }

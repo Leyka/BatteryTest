@@ -12,7 +12,7 @@ class Battery(db.Model):
     public_id = db.Column(db.Integer, unique=True, index=True, nullable=False)
     color = db.Column(db.String)
     used_by = db.Column(db.String)
-    spec_id = db.Column(db.Integer, db.ForeignKey('battery_spec.id'))
+    spec_id = db.Column(db.Integer, db.ForeignKey('battery_spec.id', ondelete="SET NULL"))
     tests = db.relationship(
         'BatteryTest', backref='battery', lazy='dynamic', cascade="all,delete")
     spec = db.relationship('BatterySpec', backref='battery')

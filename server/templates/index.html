@@ -2,23 +2,28 @@
 {% block title %}All Batteries ({{batteries | length }}){% endblock %}
 {%block content %}
 {% if batteries %}
-<div class="vertical-space">
+<div>
   {#
   <div>
     <a href="#">Copy capacity to clipboard</a>
   </div>
   #}
 </div>
-<input
-  type="text"
-  placeholder="Filter by battery ID"
-  id="filterById"
-  class="vertical-space"
-/>
+<div class="space-between">
+  <input
+    type="text"
+    placeholder="Filter by battery ID"
+    id="filterById"
+    class="vertical-space"
+  />
+  <div>
+    <button id="delete-selected">Delete selected</button>
+  </div>
+</div>
 <table id="tblBatteries" class="table-sortable">
   <thead>
     <tr>
-      <th width="40" class="no-sort"><span id="select-all">✘</span></th>
+      <th width="40" class="no-sort"><span id="select-all">☒</span></th>
       <th>Battery ID</th>
       <th width="110" title="Last known capacity (mah)">Capacity</th>
       <th width="110" title="Last known resistance (mΩ)">Resistance</th>
@@ -32,7 +37,7 @@
   <tbody>
     {% for battery in batteries %}
     <tr class="{{'warning' if not (battery.spec and battery.color) else ''}}">
-      <td><input type="checkbox" checked class="chkBattery" /></td>
+      <td><input type="checkbox" checked class="chkBattery" value="{{battery.id}}" /></td>
       <td>
         <a href="/batteries/{{battery.public_id}}"> {{ battery.public_id}} </a>
       </td>
@@ -47,7 +52,9 @@
         {{ battery.color or 'N/A' }}
       </td>
       <td>{{ battery.used_by or 'N/A' }}</td>
-      <td><a href="#" title="Delete">✘</a></td>
+      <td>
+        <a href="/batteries/delete/{{battery.id}}" title="Delete" onclick="return confirm('Confirm delete of battery #{{battery.public_id}}?')">✘</a>
+      </td>
     </tr>
     {% endfor %}
   </tbody>
