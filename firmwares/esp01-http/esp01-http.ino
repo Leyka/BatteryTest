@@ -5,7 +5,6 @@
 #define SERVER_IP "192.168.1.100:5000"
 #define API_TESTS_ROUTE "/api/tests"
 
-void wait_for_wifi();
 int send_http_battery_test(int battery_id, int capacity, float resistance);
 
 void setup() {
@@ -15,8 +14,8 @@ void setup() {
 
 void loop() {
   // Make sure we are still connected to wifi connection
-  if (WiFi.status() != WL_CONNECTED) {
-    wait_for_wifi();
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
   }
 
   // Dummy data
@@ -28,12 +27,6 @@ void loop() {
 
   // Dummy delay
   delay(5000);
-}
-
-void wait_for_wifi() {
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-  }
 }
 
 // Returns 0 if success, else an HTTP code error (ex. 404, 500 etc.)
