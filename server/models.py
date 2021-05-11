@@ -13,8 +13,7 @@ class Battery(db.Model):
     color = db.Column(db.String)
     used_by = db.Column(db.String)
     spec_id = db.Column(db.Integer, db.ForeignKey('battery_spec.id', ondelete="SET NULL"))
-    tests = db.relationship(
-        'BatteryTest', backref='battery', lazy='dynamic', cascade="all,delete")
+    tests = db.relationship('BatteryTest', backref='battery', cascade="all,delete")
     spec = db.relationship('BatterySpec', backref='battery')
 
     def __init__(self, public_id):
@@ -36,8 +35,7 @@ class BatterySpec(db.Model):
 
 class BatteryTest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    battery_id = db.Column(db.Integer, db.ForeignKey(
-        'battery.id'), nullable=False)
+    battery_id = db.Column(db.Integer, db.ForeignKey('battery.id', ondelete='CASCADE'), nullable=False)
     capacity_mah = db.Column(db.Integer, nullable=False)
     resistance_mohm = db.Column(db.Float)
     date = db.Column(db.DateTime, default=datetime.now)

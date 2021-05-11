@@ -33,14 +33,19 @@ class BatteryService:
 
     def delete_battery(self, id):
         battery = Battery.query.get(id)
-        if battery is None:
-            return
-        db.session.delete(battery)
-        db.session.commit()
+        if battery is not None:
+            db.session.delete(battery)
+            db.session.commit()
 
     def delete_batteries(self, ids):
-        # todo
-        pass
+        # Bulk delete but doesn't apply cascade delete...
+        # stmt = Battery.__table__.delete().where(Battery.id.in_(ids))
+        # db.engine.execute(stmt)
+        for id in ids:
+            battery = Battery.query.get(id)
+            if battery is not None:
+                db.session.delete(battery)
+        db.session.commit()
 
 
 class BatterySpecService:

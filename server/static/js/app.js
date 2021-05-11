@@ -44,7 +44,7 @@ if (btnDeleteSelected) {
     btnDeleteSelected.addEventListener('click', async (e) => {
         // Get only visible battery ids
         const selectedCheckboxes =
-            document.querySelectorAll('tr:not(.hidden) .chkBattery');
+            document.querySelectorAll('tr:not(.hidden) .chkBattery:checked');
         const selectedIds = [].map.call(selectedCheckboxes, x => x.value);
 
         if (selectedIds.length > 0 && confirm('Confirm multiple delete?')) {

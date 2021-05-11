@@ -51,6 +51,7 @@ def delete_battery_by_id(id):
 def delete_selected_batteries():
     battery_ids = request.json['ids']
     battery_service.delete_batteries(battery_ids)
+    return redirect(url_for('index'))
 
 
 @app.route('/specs')
