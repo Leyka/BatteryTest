@@ -12,10 +12,14 @@
 
   // Sort each row
   const sortedRows = rows.sort((a, b) => {
-      const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
-      const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
-      // TODO: Fix sort for numbers
-      return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+    const aColText = a.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+    const bColText = b.querySelector(`td:nth-child(${ column + 1 })`).textContent.trim();
+
+    const comparer = isNaN(aColText)
+      ? aColText > bColText // string
+      : parseFloat(aColText) > parseFloat(bColText); // numbers
+
+    return comparer ? (1 * dirModifier) : (-1 * dirModifier);
   });
 
   // Remove all existing TRs from the table
