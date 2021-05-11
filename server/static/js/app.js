@@ -55,6 +55,32 @@ if (btnDeleteSelected) {
     });
 }
 
+// Copy selected capacities to clipboard
+const btnCopySelectedCapacities = document.getElementById('copy-selected-capacities');
+if (btnCopySelectedCapacities) {
+    btnCopySelectedCapacities.addEventListener('click', (e) => {
+        const selectedBatteries =
+            document.querySelectorAll('tr:not(.hidden) .chkBattery:checked');
+
+        let capacities = '';
+        selectedBatteries.forEach(selectedBattery => {
+            const capacity = selectedBattery
+                .parentNode
+                .parentNode
+                .querySelector('.capacity');
+
+            if (capacity) {
+                capacities += `${capacity.innerText} `;
+            }
+        });
+
+        if (capacities) {
+            copyToClipboard(capacities.trim());
+            alert('Capacities copied to clipboard!');
+        }
+    });
+}
+
 
 // Helpers
 async function sendRequest(url, type, body) {
@@ -67,3 +93,12 @@ async function sendRequest(url, type, body) {
         body: JSON.stringify(body)
     });
 }
+
+function copyToClipboard(text) {
+    const dummyTextarea = document.createElement('textarea');
+    document.body.appendChild(dummyTextarea);
+    dummyTextarea.value = text;
+    dummyTextarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummyTextarea);
+  }

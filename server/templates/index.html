@@ -17,6 +17,7 @@
     class="vertical-space"
   />
   <div>
+    <button id="copy-selected-capacities">Copy selected capacities</button>
     <button id="delete-selected">Delete selected</button>
   </div>
 </div>
@@ -41,7 +42,7 @@
       <td>
         <a href="/batteries/{{battery.public_id}}"> {{ battery.public_id}} </a>
       </td>
-      <td>{{ battery.tests | map(attribute='capacity_mah') | list | last }}</td>
+      <td class="capacity">{{ battery.tests | map(attribute='capacity_mah') | list | last }}</td>
       <td>
         {{ battery.tests | map(attribute='resistance_mohm') | list | last |
         round(2) }}
